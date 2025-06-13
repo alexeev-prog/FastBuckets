@@ -1,2 +1,3 @@
-def hello() -> str:
-    return "Hello from fastbuckets!"
+
+__author__ = "Alexeev Bronislaw"
+__version__ = "0.1.0"
