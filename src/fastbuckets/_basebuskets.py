@@ -1,9 +1,10 @@
 from abc import ABC, abstractmethod
-from typing import Any, List
+from typing import Any
+
 from ._basebuskets import Task
 
 
-class ABCBusket(ABC):
+class ABCBucket(ABC):
     @abstractmethod
     def run(self, *args, **kwargs) -> Any:
         raise NotImplementedError
@@ -38,7 +39,7 @@ class ABCBusket(ABC):
 
     @property
     @abstractmethod
-    def queue(self) -> List[Task]:
+    def queue(self) -> list[Task]:
         raise NotImplementedError
 
     @property

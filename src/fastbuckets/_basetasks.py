@@ -1,7 +1,8 @@
 from abc import ABC, abstractmethod
-from typing import Awaitable
-from uuid import uuid5
+from collections.abc import Awaitable
 from enum import Enum
+from time import time
+from uuid import uuid5
 
 
 class TaskState(Enum):
@@ -41,20 +42,20 @@ class OneRunTask(ABCTask):
     def __init__(self, handler: Awaitable, short_name: str):
         self.handler: Awaitable = handler
         self.short_name: str = short_name
-        self.task_uuid: str = str(uuid5(short_name))
+        self.task_uuid: str = str(uuid5(short_name + str(time())))
         self.state: TaskState = TaskState.WAITING
 
     def reload(self):
         self.state = TaskState.WAITING
 
     def is_finished(self):
-        return True if self.state == TaskState.FINISHED else False
+        return self.state == TaskState.FINISHED
 
     def is_freezed(self):
-        return True if self.state == TaskState.FREEZED else False
+        return self.state == TaskState.FREEZED
 
     def is_running(self):
-        return True if self.state == TaskState.RUNNING else False
+        return self.state == TaskState.RUNNING
 
     def is_waiting(self):
-        return True if self.state == TaskState.WAITING else False
+        return self.state == TaskState.WAITING
